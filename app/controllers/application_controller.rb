@@ -5,12 +5,19 @@ class ApplicationController < ActionController::Base
 
   layout :set_layout
 
+  rescue_from Exception, with: :rescue500
+
   private
   def set_layout
-    if params[:controller].match(%r{\A(staff|admin|customer)/})
+    if params[:controller].match(%r{\A(staff|admin|customer)\b})
       Regexp.last_match[1]
     else
       'customer'
     end
+  end
+
+  def rescue500(e)
+    @exception = e
+    render'errors/internal_server_error', status: 500
   end
 end
