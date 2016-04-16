@@ -7,8 +7,6 @@ Rails.application.routes.draw do
   get 'top/index'
   end
 
-  get 'admin/index'
-
   namespace :staff do
   get 'top/index'
   end
