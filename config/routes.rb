@@ -1,16 +1,4 @@
 Rails.application.routes.draw do
-  namespace :admin do
-  get 'top/index'
-  end
-
-  namespace :customer do
-  get 'top/index'
-  end
-
-  namespace :staff do
-  get 'top/index'
-  end
-
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -65,16 +53,20 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-  namespace :staff do
-    root 'top#index'
-  end
 
   namespace :admin do
     root 'top#index'
+    get 'top/index'
   end
 
   namespace :customer do
     root 'top#index'
+    get 'top/index'
+  end
+
+  namespace :staff do
+    root 'top#index'
+    get 'top/index'
   end
 
   root 'errors#routing_error'
