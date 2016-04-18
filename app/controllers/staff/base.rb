@@ -7,5 +7,5 @@ class Staff::Base < ApplicationController
     end
   end
 
-  helper_method :current_session_member
+  helper_method :current_staff_member
 end
