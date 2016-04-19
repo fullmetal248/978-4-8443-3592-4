@@ -17,10 +17,10 @@ describe Staff::Authenticator do
       expect(Staff::Authenticator.new(m).authenticate(nil)).to be_falsey
     end
 
-    example '停止フラグが立っていればfalseをかえす' do
-      m = FactoryGirl.build(:staff_member, suspended: true)
-      expect(Staff::Authenticator.new(m).authenticate(nil)).to be_falsey
-    end
+    # example '停止フラグが立っていればfalseをかえす' do
+    #   m = FactoryGirl.build(:staff_member, suspended: true)
+    #   expect(Staff::Authenticator.new(m).authenticate(nil)).to be_falsey
+    # end
 
     example '開始前ならfalseをかえす' do
       m = FactoryGirl.build(:staff_member, start_date: Date.tomorrow)
@@ -30,6 +30,11 @@ describe Staff::Authenticator do
     example '終了後ならfalseをかえす' do
       m = FactoryGirl.build(:staff_member, end_date: Date.today)
       expect(Staff::Authenticator.new(m).authenticate(nil)).to be_falsey
+    end
+
+    example '停止フラグが立っていてもtrueを返す' do
+      m = FactoryGirl.build(:staff_member, suspended: true)
+      expect(Staff::Authenticator.new(m).authenticate('pw')).to be_truthy
     end
   end
 end
