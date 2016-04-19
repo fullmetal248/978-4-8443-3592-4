@@ -49,3 +49,5 @@ gem 'rspec-rails'
 
 # gem 'bcrypt', '~> 3.1.7'
 gem 'bcrypt'
+
+gem 'factory_girl_rails', '~> 4.0'
