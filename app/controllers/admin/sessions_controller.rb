@@ -13,7 +13,7 @@ class Admin::SessionsController < Admin::Base
     if @form.email.present?
       administrator = Administrator.find_by(email_for_index: @form.email.downcase)
     end
-    if administrator
+    if Admin::Authenticator.new(administrator).authenticate(@form.password)
       if administrator.suspended?
         flash.now.alert = 'アカウントが停止されています。'
         render action: 'new'
