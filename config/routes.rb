@@ -58,8 +58,7 @@ Rails.application.routes.draw do
     root 'top#index'
     get 'top/index'
     get 'login' => 'sessions#new', as: :login
-    post 'session' => 'sessions#create', as: :session
-    delete 'session' => 'sessions#destroy'
+    resource :session, only: [:create, :destroy]
     # get 'staff_members' => 'staff_members#index'
     # get 'staff_members/:id' => 'staff_members#show'
     # get 'staff_members/new' => 'staff_members#new'
@@ -79,8 +78,7 @@ Rails.application.routes.draw do
     root 'top#index'
     get 'top/index'
     get 'login' => 'sessions#new', as: :login
-    post 'session' => 'sessions#create', as: :session
-    delete 'session' => 'sessions#destroy'
+    resource :session, only: [:create, :destroy]
     resource :account, except: [ :new, :create, :destroy]
   end
 
