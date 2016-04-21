@@ -81,6 +81,7 @@ Rails.application.routes.draw do
     get 'login' => 'sessions#new', as: :login
     post 'session' => 'sessions#create', as: :session
     delete 'session' => 'sessions#destroy'
+    resource :account, except: [ :new, :create, :destroy]
   end
 
   root 'errors#routing_error'
