@@ -67,7 +67,7 @@ Rails.application.routes.draw do
     get 'top/index'
   end
 
-  namespace :staff do
+  namespace :staff, path: '' do
     root 'top#index'
     get 'top/index'
     get 'login' => 'sessions#new', as: :login
