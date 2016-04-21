@@ -54,19 +54,23 @@ Rails.application.routes.draw do
   #     resources :products
   #   end
 
-  namespace :admin do
-    root 'top#index'
-    get 'top/index'
-    get 'login' => 'sessions#new', as: :login
-    resource :session, only: [:create, :destroy]
-    # get 'staff_members' => 'staff_members#index'
-    # get 'staff_members/:id' => 'staff_members#show'
-    # get 'staff_members/new' => 'staff_members#new'
-    # get 'staff_members/:id/edit' => 'staff_members#edit'
-    # post 'staff_members' => 'staff_members#create'
-    # patch 'staff_members/:id' => 'staff_members#update'
-    # delete 'staff_members/:id' => 'staff_members#destroy'
-    resources :staff_members
+  config = Rails.application.config.baukis
+
+  constraints host: config[:admin][:host] do
+    namespace :admin, path: config[:admin][:path] do
+      root 'top#index'
+      get 'top/index'
+      get 'login' => 'sessions#new', as: :login
+      resource :session, only: [:create, :destroy]
+      # get 'staff_members' => 'staff_members#index'
+      # get 'staff_members/:id' => 'staff_members#show'
+      # get 'staff_members/new' => 'staff_members#new'
+      # get 'staff_members/:id/edit' => 'staff_members#edit'
+      # post 'staff_members' => 'staff_members#create'
+      # patch 'staff_members/:id' => 'staff_members#update'
+      # delete 'staff_members/:id' => 'staff_members#destroy'
+      resources :staff_members
+    end
   end
 
   namespace :customer do
@@ -74,12 +78,14 @@ Rails.application.routes.draw do
     get 'top/index'
   end
 
-  namespace :staff, path: '' do
-    root 'top#index'
-    get 'top/index'
-    get 'login' => 'sessions#new', as: :login
-    resource :session, only: [:create, :destroy]
-    resource :account, except: [ :new, :create, :destroy]
+  constraints host: config[:staff][:host] do
+    namespace :staff, path: config[:staff][:path] do
+      root 'top#index'
+      get 'top/index'
+      get 'login' => 'sessions#new', as: :login
+      resource :session, only: [:create, :destroy]
+      resource :account, except: [ :new, :create, :destroy]
+    end
   end
 
   root 'errors#routing_error'
