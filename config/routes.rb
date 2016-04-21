@@ -73,9 +73,11 @@ Rails.application.routes.draw do
     end
   end
 
-  namespace :customer do
-    root 'top#index'
-    get 'top/index'
+  constraints host: config[:customer][:host] do
+    namespace :customer, path: config[:customer][:path] do
+      root 'top#index'
+      get 'top/index'
+    end
   end
 
   constraints host: config[:staff][:host] do
