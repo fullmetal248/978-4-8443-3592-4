@@ -67,7 +67,7 @@ Rails.application.routes.draw do
     # post 'staff_members' => 'staff_members#create'
     # patch 'staff_members/:id' => 'staff_members#update'
     # delete 'staff_members/:id' => 'staff_members#destroy'
-    resource :staff_members
+    resources :staff_members
   end
 
   namespace :customer do
