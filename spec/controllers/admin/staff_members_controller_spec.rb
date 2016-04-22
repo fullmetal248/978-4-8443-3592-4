@@ -14,4 +14,23 @@ RSpec.describe Admin::StaffMembersController, type: :controller do
       expect { post :create }.to raise_error(ActionController::ParameterMissing)
     end
   end
+
+  describe '#update' do
+    let(:staff_member) { create(:staff_member) }
+
+    example 'suspendフラグをセットする' do
+      params_hash.merge!(suspended: true)
+      patch :update, id: staff_member.id, staff_member: params_hash
+      staff_member.reload
+      expect(staff_member).to be_suspended
+    end
+
+    example 'hashed_passwordの値は書き換え不可' do
+      params_hash.delete(:password)
+      params_hash.merge!(hashed_password: 'x')
+      expect {
+        patch :update, id: staff_member.id, staff_member: params_hash
+      }.not_to change { staff_member.hashed_password.to_s }
+    end
+  end
 end
