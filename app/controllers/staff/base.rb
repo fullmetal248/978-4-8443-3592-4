@@ -7,5 +7,12 @@ class Staff::Base < ApplicationController
     end
   end
 
+  def authorize
+    unless current_staff_member
+      flash.alert = '職員としてログインしてください。'
+      redirect_to :staff_login
+    end
+  end
+
   helper_method :current_staff_member
 end
