@@ -18,7 +18,7 @@ class Staff::SessionsController < Staff::Base
     if Staff::Authenticator.new(staff_member).authenticate(@form.password)
       if staff_member.suspended?
         staff_member.events.create!(type: 'rejected')
-        flash.now.aleat = 'アカウントが停止されています。'
+        flash.now.alert = 'アカウントが停止されています。'
         redirect_to :staff_root
       end
       session[:staff_member_id] = staff_member.id
