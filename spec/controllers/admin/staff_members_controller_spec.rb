@@ -1,6 +1,10 @@
 require 'rails_helper'
 
-RSpec.describe Admin::StaffMembersController, type: :controller do
+describe Admin::StaffMembersController, 'ログイン前' do
+  it_behaves_like 'a protected admin controller'
+end
+
+describe Admin::StaffMembersController do
   let(:params_hash) { attributes_for(:staff_member) }
   let(:administrator) { create(:administrator) }
 
@@ -16,14 +20,15 @@ RSpec.describe Admin::StaffMembersController, type: :controller do
 
     example '例外ActionController::ParameterMissingが発生' do
       bypass_rescue
-      expect { post :create }.to raise_error(ActionController::ParameterMissing)
+      expect { post :create }.
+          to raise_error(ActionController::ParameterMissing)
     end
   end
 
   describe '#update' do
     let(:staff_member) { create(:staff_member) }
 
-    example 'suspendフラグをセットする' do
+    example 'suspendedフラグをセットする' do
       params_hash.merge!(suspended: true)
       patch :update, id: staff_member.id, staff_member: params_hash
       staff_member.reload
