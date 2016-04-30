@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Staff::TopController, 'ログイン前' do
+describe Staff::TopController, 'ログイン後' do
   let(:staff_member) { create(:staff_member) }
 
   before do
