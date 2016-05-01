@@ -69,7 +69,10 @@ Rails.application.routes.draw do
       # post 'staff_members' => 'staff_members#create'
       # patch 'staff_members/:id' => 'staff_members#update'
       # delete 'staff_members/:id' => 'staff_members#destroy'
-      resources :staff_members
+      resources :staff_members do
+        resources :staff_events, only: [:index]
+      end
+      resources :staff_events, only: [:index]
     end
   end
 
