@@ -52,3 +52,4 @@ gem 'bcrypt'
 
 gem 'factory_girl_rails', '~> 4.0'
 gem 'foreigner', '~>1.6.1'
+gem 'kaminari', '~> 0.15.1'
